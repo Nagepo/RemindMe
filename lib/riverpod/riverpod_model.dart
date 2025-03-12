@@ -11,26 +11,31 @@ class RiverpodModel extends ChangeNotifier {
 
   void changeMessage(String message) {
     info["message"] = message;
+    notifyListeners();
   }
 
   void changeTimes(String times) {
     info["times"] = times;
+    notifyListeners();
   }
 
   void changeIcon(IconData icon) {
     info["icon"] = icon;
+    notifyListeners();
   }
 
   void aad() {
     reminders.add(create(info["message"], info["times"], info["icon"]));
   }
 
-  SizedBox create(String message, int times, IconData icon) {
+  SizedBox create(String message, String times, IconData icon) {
     return SizedBox(
-      child: Card(
+      height: 150,
+      child: Card.outlined(
+        color: Colors.grey.shade300,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text(message), Text(times.toString()), Icon(icon)],
+          children: [Text(message), Text(times), Icon(icon)],
         ),
       ),
     );

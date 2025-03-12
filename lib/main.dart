@@ -12,7 +12,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.grey.shade400,
+        textTheme: TextTheme(bodyMedium: TextStyle(color: Colors.white)),
+      ),
+    );
   }
 }
 
@@ -29,17 +36,15 @@ class MyHomePage extends ConsumerWidget {
       body: Center(
         child:
             ref.watch(remProvider).reminders.isEmpty
-                ? const Text('There\'s no reminder active')
-                : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ListView.builder(
-                      itemCount: ref.watch(remProvider).reminders.length,
-                      itemBuilder: (context, index) {
-                        return ref.watch(remProvider).reminders[index];
-                      },
-                    ),
-                  ],
+                ? Center(child: const Text('There\'s no reminder active'))
+                : SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.92,
+                  child: ListView.builder(
+                    itemCount: ref.watch(remProvider).reminders.length,
+                    itemBuilder: (context, index) {
+                      return ref.watch(remProvider).reminders[index];
+                    },
+                  ),
                 ),
       ),
       floatingActionButton: FloatingActionButton(

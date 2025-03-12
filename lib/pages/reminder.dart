@@ -4,16 +4,12 @@ import 'package:flutter/material.dart';
 
 class Reminder {
   String message;
-  int times;
+  String times;
   IconData icon;
 
-  Reminder({
-    required this.message,
-    this.times = 1,
-    this.icon = Icons.notification_add,
-  });
+  Reminder({required this.message, required this.times, required this.icon});
 
-  Reminder copyWith({String? message, int? times, IconData? icon}) {
+  Reminder copyWith({String? message, String? times, IconData? icon}) {
     return Reminder(
       message: message ?? this.message,
       times: times ?? this.times,
@@ -32,7 +28,7 @@ class Reminder {
   factory Reminder.fromMap(Map<String, dynamic> map) {
     return Reminder(
       message: map['message'] as String,
-      times: map['times'] as int,
+      times: map['times'] as String,
       icon: IconData(map['icon'] as int, fontFamily: 'MaterialIcons'),
     );
   }

@@ -10,13 +10,25 @@ class SetRem extends ConsumerWidget {
     final textController = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(title: Text("Remind Me"), centerTitle: true),
+      appBar: AppBar(
+        title: Text("Remind Me"),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+      ),
       body: Center(
         child: Column(
           children: [
             Text("Insert the text of the notification:"),
-            TextField(controller: textController),
-            SizedBox(height: 30),
+            TextFormField(
+              decoration: const InputDecoration(hintText: 'Enter the message'),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 50),
             Text(
               "Choose how many times to display in a day: ${ref.watch(remProvider).info["times"].toString()}",
             ),
@@ -43,10 +55,17 @@ class SetRem extends ConsumerWidget {
                 ),
               ],
             ),
-            SizedBox(height: 30),
-            Text("Choose the icon for the notification:"),
-            Icon(ref.watch(remProvider).info["icon"]),
+            SizedBox(height: 50),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Choose the icon for the notification:"),
+                Icon(ref.watch(remProvider).info["icon"]),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
                   onPressed: () {
@@ -74,8 +93,8 @@ class SetRem extends ConsumerWidget {
                 ),
               ],
             ),
-            SizedBox(height: 30),
-            TextButton(
+            SizedBox(height: 50),
+            ElevatedButton(
               onPressed: () {
                 ref.read(remProvider).changeMessage(textController.text);
                 ref.read(remProvider).aad();
