@@ -28,7 +28,7 @@ class SetRem extends ConsumerWidget {
                   hintText: 'Enter the message',
                   border: OutlineInputBorder(),
                 ),
-                //onChanged: (){},
+                //onChanged: (value) => ref.read(remProvider).changeMessage(value),
               ),
             ),
             SizedBox(height: 50),
