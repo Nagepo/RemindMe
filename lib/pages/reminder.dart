@@ -1,19 +1,32 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class Reminder {
   String message;
   String times;
   IconData icon;
+  bool active;
 
-  Reminder({required this.message, required this.times, required this.icon});
+  Reminder({
+    required this.message,
+    required this.times,
+    required this.icon,
+    this.active = true,
+  });
 
-  Reminder copyWith({String? message, String? times, IconData? icon}) {
+  Reminder copyWith({
+    String? message,
+    String? times,
+    IconData? icon,
+    bool? active,
+  }) {
     return Reminder(
       message: message ?? this.message,
       times: times ?? this.times,
       icon: icon ?? this.icon,
+      active: active ?? this.active,
     );
   }
 
@@ -22,6 +35,7 @@ class Reminder {
       'message': message,
       'times': times,
       'icon': icon.codePoint,
+      'active': active,
     };
   }
 
@@ -30,6 +44,7 @@ class Reminder {
       message: map['message'] as String,
       times: map['times'] as String,
       icon: IconData(map['icon'] as int, fontFamily: 'MaterialIcons'),
+      active: map['active'] as bool,
     );
   }
 
@@ -39,8 +54,9 @@ class Reminder {
       Reminder.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() =>
-      'Reminder(message: $message, times: $times, icon: $icon)';
+  String toString() {
+    return 'Reminder(message: $message, times: $times, icon: $icon, active: $active)';
+  }
 
   @override
   bool operator ==(covariant Reminder other) {
@@ -48,9 +64,12 @@ class Reminder {
 
     return other.message == message &&
         other.times == times &&
-        other.icon == icon;
+        other.icon == icon &&
+        other.active == active;
   }
 
   @override
-  int get hashCode => message.hashCode ^ times.hashCode ^ icon.hashCode;
+  int get hashCode {
+    return message.hashCode ^ times.hashCode ^ icon.hashCode ^ active.hashCode;
+  }
 }

@@ -20,13 +20,8 @@ class SetRem extends ConsumerWidget {
           children: [
             Text("Insert the text of the notification:"),
             TextFormField(
+              controller: textController,
               decoration: const InputDecoration(hintText: 'Enter the message'),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
             ),
             SizedBox(height: 50),
             Text(

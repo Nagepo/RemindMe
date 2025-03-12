@@ -30,12 +30,20 @@ class RiverpodModel extends ChangeNotifier {
 
   SizedBox create(String message, String times, IconData icon) {
     return SizedBox(
-      height: 150,
+      height: 100,
       child: Card.outlined(
-        color: Colors.grey.shade300,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text(message), Text(times), Icon(icon)],
+        color: Colors.grey.shade600,
+        child: Row(
+          children: [
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Icon(icon), Text(message), Text(times)],
+              ),
+            ),
+            Expanded(child: Icon(Icons.redo_outlined)),
+            //Switch(value: true, onChanged: )
+          ],
         ),
       ),
     );
