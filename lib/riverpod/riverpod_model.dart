@@ -36,9 +36,14 @@ class RiverpodModel extends ChangeNotifier {
         child: Row(
           children: [
             Expanded(
+              flex: 4,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Icon(icon), Text(message), Text(times)],
+                children: [
+                  Expanded(flex: 2, child: Icon(icon)),
+                  Expanded(flex: 4, child: Text(message)),
+                  Expanded(child: Center(child: Text(times))),
+                ],
               ),
             ),
             Expanded(child: Icon(Icons.redo_outlined)),
@@ -50,6 +55,10 @@ class RiverpodModel extends ChangeNotifier {
   }
 
   void reset() {
-    info = {"message": "Just do it!", "times": 1, "icon": Icons.notifications};
+    info = {
+      "message": "Just do it!",
+      "times": "1",
+      "icon": Icons.notifications,
+    };
   }
 }

@@ -8,6 +8,7 @@ class SetRem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textController = TextEditingController();
+    String text = "";
 
     return Scaffold(
       appBar: AppBar(
@@ -19,9 +20,16 @@ class SetRem extends ConsumerWidget {
         child: Column(
           children: [
             Text("Insert the text of the notification:"),
-            TextFormField(
-              controller: textController,
-              decoration: const InputDecoration(hintText: 'Enter the message'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: textController,
+                decoration: const InputDecoration(
+                  hintText: 'Enter the message',
+                  border: OutlineInputBorder(),
+                ),
+                //onChanged: (){},
+              ),
             ),
             SizedBox(height: 50),
             Text(
