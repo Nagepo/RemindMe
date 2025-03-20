@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -34,18 +35,17 @@ class MyHomePage extends ConsumerWidget {
         backgroundColor: Colors.black,
       ),
       body: Center(
-        child:
-            ref.watch(remProvider).reminders.isEmpty
-                ? Center(child: const Text('There\'s no reminder active'))
-                : SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.92,
-                  child: ListView.builder(
-                    itemCount: ref.watch(remProvider).reminders.length,
-                    itemBuilder: (context, index) {
-                      return ref.watch(remProvider).reminders[index];
-                    },
-                  ),
+        child: ref.watch(remProvider).reminders.isEmpty
+            ? Center(child: const Text('There\'s no reminder active'))
+            : SizedBox(
+                height: MediaQuery.of(context).size.height * 0.92,
+                child: ListView.builder(
+                  itemCount: ref.watch(remProvider).reminders.length,
+                  itemBuilder: (context, index) {
+                    return ref.watch(remProvider).reminders[index];
+                  },
                 ),
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

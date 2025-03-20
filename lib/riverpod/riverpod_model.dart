@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remind_me/pages/reminder.dart';
+import 'package:remind_me/riverpod/riverpod.dart';
 
 class RiverpodModel extends ChangeNotifier {
   List<SizedBox> reminders = [];
@@ -7,6 +9,8 @@ class RiverpodModel extends ChangeNotifier {
     "message": "Just do it!",
     "times": "1",
     "icon": Icons.notifications,
+    "active": true,
+    "ref": WidgetRef,
   };
 
   void changeMessage(String message) {
@@ -24,11 +28,17 @@ class RiverpodModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void aad() {
-    reminders.add(create(info["message"], info["times"], info["icon"]));
+  void changeActive(bool x) {
+    info["active"] = x;
+    notifyListeners();
   }
 
-  SizedBox create(String message, String times, IconData icon) {
+  void aad() {
+    reminders
+        .add(create(info["message"], info["times"], info["icon"], info["ref"]));
+  }
+
+  SizedBox create(String message, String times, IconData icon, WidgetRef ref) {
     return SizedBox(
       height: 100,
       child: Card.outlined(
@@ -46,8 +56,18 @@ class RiverpodModel extends ChangeNotifier {
                 ],
               ),
             ),
-            Expanded(child: Icon(Icons.redo_outlined)),
-            //Switch(value: true, onChanged: )
+            Expanded(
+              child: Switch(
+                value: ref.watch(remProvider).info["active"],
+                onChanged: (bool newValue) {
+                  ref.read(remProvider).changeActive(newValue);
+                },
+                activeColor: Colors.green,
+                inactiveThumbColor: Colors.red,
+                activeTrackColor: Colors.lightGreen,
+                inactiveTrackColor: Colors.orange,
+              ),
+            ),
           ],
         ),
       ),
@@ -59,6 +79,8 @@ class RiverpodModel extends ChangeNotifier {
       "message": "Just do it!",
       "times": "1",
       "icon": Icons.notifications,
+      "active": true,
+      "ref": WidgetRef,
     };
   }
 }

@@ -8,11 +8,13 @@ class SetRem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textController = TextEditingController();
-    String text = "";
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Remind Me"),
+        title: Text(
+          "Remind Me",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
@@ -33,7 +35,10 @@ class SetRem extends ConsumerWidget {
             ),
             SizedBox(height: 50),
             Text(
-              "Choose how many times to display in a day: ${ref.watch(remProvider).info["times"].toString()}",
+              "Choose how many times to display in a day:",
+              //The code below shows the choice taken, but gives problem with
+              //the textController
+              //${ref.watch(remProvider).info["times"].toString()}
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +68,9 @@ class SetRem extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Choose the icon for the notification:"),
-                Icon(ref.watch(remProvider).info["icon"]),
+                //The code below shows the choice taken, but gives problem with
+                //the textController
+                //Icon(ref.watch(remProvider).info["icon"]),
               ],
             ),
             SizedBox(height: 10),
